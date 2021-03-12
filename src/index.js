@@ -64,13 +64,16 @@ exports.default = class EdgeService {
         if (typeof edgeDriverLogs === 'string') {
             const DEFAULT_LOG_FILENAME = `EdgeDriver-${config.port}.log`
             const logFile = getFilePath(edgeDriverLogs, DEFAULT_LOG_FILENAME);
+            const errlogFile = getFilePath(edgeDriverLogs, `EdgeDriver-${config.port}.err.log`);
             fs.ensureFileSync(logFile);
+            fs.ensureFileSync(errlogFile);
             if (isChromiumEdge) {
                 edgeDriverArgs.push(`--log-path=${logFile}`)
             } else {
                 options.maxBuffer = 10 * 1024 * 1024;
                 callback = function (error, stdout, stderr) {
                     fs.writeFileSync(logFile, stdout);
+                    fs.writeFileSync(errlogFile, stderr);
                 };
             }
         }
