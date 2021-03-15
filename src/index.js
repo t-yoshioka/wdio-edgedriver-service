@@ -86,7 +86,7 @@ exports.default = class EdgeService {
         console.log('options : ')
         console.log(options)
         console.log('ENV : ')
-        console.log(process.env)
+        console.log(process.env.PATH)
         this.process = require('child_process').execFile(serverPath, edgeDriverArgs, options, callback);
     }
 
