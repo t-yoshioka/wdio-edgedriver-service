@@ -80,7 +80,8 @@ exports.default = class EdgeService {
 
         const serverPath = process.platform === 'win32' ?
             (isChromiumEdge ? require('msedgedriver').path : 'MicrosoftWebDriver.exe') :
-            require('msedgedriver').path;
+            'msedgedriver';
+        console.log('edgeserver path : ' + serverPath)
         this.process = require('child_process').execFile(serverPath, edgeDriverArgs, options, callback);
     }
 
